@@ -3,6 +3,7 @@ import {useState} from 'react';
 import Search from './components/Search.jsx';
 import Spinner from './components/Spinner.jsx';
 import MovieCard from './components/MovieCard.jsx';
+import { useDebounce } from 'react-use';
 
 const API_BASE_URL='https://api.themoviedb.org/3'
 
@@ -21,43 +22,49 @@ const App = () => {
   const [movieList,setMovieList] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
   const [isLoading,setIsLoading] = useState(false)
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
 
-  const fetchMovies = async() => {
-    setIsLoading(true)
-    setErrorMessage('')
-    try{
-      const endpoint = `${API_BASE_URL}/discover/movie?sort_by=vote_count.desc`
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500,[searchTerm])  //this debounces the search term to prevent too many API requests. By waiting for the user to stop typing for 500
+                                                                            
 
-      const response = await fetch(endpoint, API_OPTIONS)
 
-       if(!response.ok) {
+  async function fetchMovies(query = '') {
+    setIsLoading(true);
+    setErrorMessage('');
+    try {
+      const endpoint = query
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+        : `${API_BASE_URL}/discover/movie?sort_by=vote_count.desc`;
+
+      const response = await fetch(endpoint, API_OPTIONS);
+
+      if (!response.ok) {
         throw new Error('Failed to fetch movies');
-      } 
+      }
 
-      const data=await response.json()
-      
-      if(data.Response === 'False') {
+      const data = await response.json();
+
+      if (data.Response === 'False') {
         setErrorMessage(data.Error || 'Failed to fetch movies');
         setMovieList([]);
         return;
       }
-      setMovieList(data.results || [])
+      setMovieList(data.results || []);
 
     }
-    catch(error)
-    {
+    catch (error) {
       console.error(`Error fetching movies: ${error}`);
       setErrorMessage('Error fetching movies. Please try again later.');
     }
-    finally{
-      setIsLoading(false)
+    finally {
+      setIsLoading(false);
     }
 
   }
 
   useEffect( () => {
-    fetchMovies()
-  },[])
+    fetchMovies(debouncedSearchTerm)
+  },[debouncedSearchTerm])
 
   return (
 
