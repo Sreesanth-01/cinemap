@@ -13,7 +13,7 @@ const SelectedMovie = ({movie,onClose}) =>{
                     <h2>{title}</h2>
                     <div className="movie-meta">
                         
-                        <span>⭐ {movie.vote_average.toFixed(1)}</span>
+                        <span>⭐{vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
                          <span>•</span>
                         <p className='lang'>{original_language}</p>
                         <span>•</span>

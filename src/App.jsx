@@ -17,6 +17,7 @@ const API_OPTIONS={
   }
 }
 
+
 const App = () => {
   const [searchTerm,setSearchTerm] = useState('')
   const [movieList,setMovieList] = useState([])
