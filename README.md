@@ -1,16 +1,24 @@
-# React + Vite
+# 🎬 Cinemap – Movie Lister & Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Cinemap is a React-based web application that allows users to **browse and search movies** using data from the **TMDB (The Movie Database) API**.  
+It features **debounced searching** for better performance and a clean, responsive UI built with **Tailwind CSS**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- Browse popular and trending movies
+- Search for movies using TMDB API
+- Debounced search to reduce unnecessary API calls
+- Responsive and modern UI using Tailwind CSS
+- Fast and smooth user experience
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+- **React**
+- **TMDB API**
+- **Tailwind CSS**
+- **JavaScript**
+- **Debounced Search**
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
